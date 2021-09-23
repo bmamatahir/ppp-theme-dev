@@ -1,0 +1,104 @@
+<div class="hero-section__inner">
+    <div class="hero-section__bg-image h-100">
+        {% if section.settings.background-image != blank %}
+            <img class="w-100 h-100" style="object-fit: cover" src="{{ section.settings.background-image | img_url: 'master' }}" alt="">
+        {% else %}
+            {% capture current %}{% cycle 1, 2 %}{% endcapture %}
+            {{ 'lifestyle-' | append: current | placeholder_svg_tag }}
+        {% endif %}
+    </div>
+
+    <div class="container py-5 my-5">
+        <div class="row" style="color: {{ section.settings.color }}">
+            <div class="col {% if section.settings.centered %} text-center {% endif %}">
+                <h1 class="display-4 fw-normal">{{ section.settings.primary-heading }}</h1>
+                <span>{{ section.settings.lead }}</span>
+                <a class="btn btn-{{ section.settings.button-color }}"
+                   href="{{ section.settings.button-link }}">{{ section.settings.button-label }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+"name": "Hero",
+"tag": "section",
+"class": "hero-section",
+"settings": [
+{
+"type": "checkbox",
+"id": "centered",
+"label": "Center content",
+"default": true
+},
+{
+    "type": "color",
+    "id": "color",
+    "label": "Text color",
+    "default": "#000000"
+},
+{
+"type": "image_picker",
+"id": "background-image",
+"label": "Background image"
+},
+{
+"type": "text",
+"id": "primary-heading",
+"label": "Primary heading",
+"default": "Reach the moon with LOVE 😘"
+},
+{
+"type": "richtext",
+"id": "lead",
+"label": "Simple text",
+"default": "<p>Find your true love, and always be very close to GOD</p>"
+},
+{
+"type": "text",
+"id": "button-label",
+"label": "Button label",
+"default": "Spread love"
+},
+{
+"type": "url",
+"id": "button-link",
+"label": "Button Link"
+},
+{
+"type": "select",
+"id": "button-color",
+"label": "Button theme",
+"options": [
+{
+"value": "success",
+"label": "Success"
+},
+{
+"value": "info",
+"label": "Info"
+},
+{
+"value": "danger",
+"label": "Danger"
+},
+{
+"value": "warning",
+"label": "Warning"
+},
+{
+"value": "link",
+"label": "Link"
+}
+],
+"default": "danger"
+}
+],
+"presets": [
+{
+"name": "Simple Hero"
+}
+]
+}
+{% endschema %}

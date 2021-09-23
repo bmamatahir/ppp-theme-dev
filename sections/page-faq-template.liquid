@@ -1,0 +1,56 @@
+<div class="container py-5">
+
+    <div class="mb-5 text-center">
+        <h1>FAQ</h1>
+        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, magni natus.</p>
+    </div>
+    <div class="row">
+        <div class="col">
+
+            {% for block in section.blocks %}
+                <div class="accordion accord" id="accordionFAQ-{{ block.id }}">
+                    <div class="accordion-item my-3">
+                        <h2 class="accordion-header" id="heading-{{ forloop.index }}">
+                            <button class="accordion-button {% if forloop.index > 1  %}collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ forloop.index }}" aria-expanded="false" aria-controls="collapse-{{ forloop.index }}">
+                                {{ block.settings.question }}
+                            </button>
+                        </h2>
+                        <div id="collapse-{{ forloop.index }}" class="accordion-collapse collapse {% if forloop.index == 1  %}show{% endif %}" aria-labelledby="heading-{{ forloop.index }}" data-bs-parent="#accordionFAQ-{{ forloop.index }}">
+                            <div class="accordion-body">
+                                {{ block.settings.answer }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "FAQ",
+    "blocks": [
+        {
+            "name": "Question",
+            "type": "faq-items",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "question",
+                    "label": "Question",
+                    "default": "Set a question may customer could ask"
+                },
+                {
+                    "type": "richtext",
+                    "id": "answer",
+                    "label": "Answer",
+                    "default": "<p>Write an easy to read answer</p>"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

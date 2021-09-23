@@ -1,0 +1,85 @@
+<footer class="footer-section bg-light py-5">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gap-4 gap-lg-0">
+            {% assign footer_cols = section.settings.footer_cols %}
+            {% for block in section.blocks limit:footer_cols %}
+                <div class="col">
+                    {% if block.type == 'data' %}
+                        <img class="img-fluid mb-3" src="{{ block.settings.logo | img_url: 'small' }}">
+                        <p>{{ block.settings.text }}</p>
+
+                        {% else %}
+                        <h5>{{ block.settings.heading }}</h5>
+                        <ul class="list-unstyled">
+                            {% for link in linklists[block.settings.list].links %}
+                                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container text-center">
+        {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+        {% endfor %}
+    </div>
+</footer>
+{{ 'bootstrap.bundle.min.js' | asset_url | script_tag }}
+{{ 'application.js' | asset_url | script_tag }}
+
+{% schema %}
+
+{
+    "name": "Footer",
+    "max_blocks": 4,
+    "settings": [
+        {
+            "type": "range",
+            "id": "footer_cols",
+            "min": 2,
+            "max": 4,
+            "step": 1,
+            "label": "Footer columns",
+            "default": 3
+        }
+    ],
+    "blocks": [
+        {
+            "name": "Store information",
+            "type": "data",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "label": "Brand logo",
+                    "id": "logo"
+                },
+                {
+                    "type": "richtext",
+                    "label": "Store information",
+                    "id": "text",
+                    "default": "<p>Set contact infos or map view</p>"
+                }
+            ]
+        },
+        {
+            "name": "Link list",
+            "type": "menu",
+            "settings": [
+                {
+                    "type": "text",
+                    "label": "Menu heading",
+                    "id": "heading",
+                    "default": "Menu"
+                },
+                {
+                    "type": "link_list",
+                    "label": "List attached",
+                    "id": "list"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

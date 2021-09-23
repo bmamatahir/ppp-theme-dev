@@ -1,0 +1,101 @@
+<div class="container py-5 my-5">
+    <div class="row">
+        <div class="mb-4 d-flex justify-content-between gap-3">
+            <h2>Addresses ({{ customer.addresses_count }})</h2>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewAddress">
+                New Address
+            </button>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
+            {% for address in customer.addresses %}
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <p>{{ address | format_address }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <form class="address-delete-form"
+                                  method="post"
+                                  action="/account/addresses/{{ address.id }}"
+                                  onSubmit="return confirm('Are you sure you want to delete this address?') "
+                            >
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addNewAddress" tabindex="-1" aria-labelledby="addNewAddressLabel" aria-hidden="true">
+    {% form 'customer_address', customer.new_address %}
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNewAddressLabel">Add new address</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row row-cols-2">
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">First name</label>
+                            <input id="first_name" class="form-control" type="text" name="address[first_name]">
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Last name</label>
+                            <input id="last_name" class="form-control" type="text" name="address[last_name]">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="company" class="form-label">Company</label>
+                        <input id="company" class="form-control" type="text" name="address[company]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address1" class="form-label">Address 1</label>
+                        <input id="address1" class="form-control" type="text" name="address[address1]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address2" class="form-label">Address 2</label>
+                        <input id="address2" class="form-control" type="text" name="address[address2]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input id="city" class="form-control" type="text" name="address[city]">
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="mb-3">
+                            <label for="addAddressCountryInput" class="form-label">Country</label>
+                            <select id="addAddressCountryInput" class="form-select" aria-label="Country" name="address[country]">
+                                {{ all_country_option_tags }}
+                            </select>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="addAddressProvinceInput" class="form-label">Province</label>
+                            <select id="addAddressProvinceInput" class="form-select" aria-label="Province" name="address[province]">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zip" class="form-label">ZIP/Postal Code</label>
+                        <input id="zip" class="form-control" type="text" name="address[zip]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input id="phone" class="form-control" type="tel" name="address[phone]">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    {% endform %}
+</div>

@@ -1,0 +1,47 @@
+<div class="container py-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+            <h2>Login form</h2>
+
+            {% form 'customer_login' %}
+                {% render 'form-errors', form: form %}
+                <div class="mb-3">
+                    <label for="email-input" class="form-label">Email address</label>
+                    <input type="email" class="form-control  rounded-0" id="email-input" aria-describedby="emailHelp" name="customer[email]">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password-input" class="form-label">Password</label>
+                    <input type="password" class="form-control  rounded-0" id="password-input" name="customer[password]">
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg rounded-0 w-100" value="Sign in"/>
+            {% endform %}
+
+            <div class="text-center my-5">
+                <a id="forgotPassword" href="#recover">forgot password?</a>
+            </div>
+
+
+            <div class="d-none" id="forgetPasswordForm">
+                {% form 'recover_customer_password' %}
+                    {% render 'form-errors', form: form %}
+
+
+                    <h2>Forget password</h2>
+
+                    <div class="email mb-3">
+                        <label class="form-label" for="email">Email</label>
+                        <input class="form-control rounded-0" type="email" name="email">
+                    </div>
+
+                    <div class="submit">
+                        <input class="btn btn-primary w-100 rounded-0" type="submit" value="Recover">
+                    </div>
+                {% endform %}
+            </div>
+        </div>
+
+
+
+    </div>
+</div>

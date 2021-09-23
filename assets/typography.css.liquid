@@ -1,0 +1,15 @@
+{% assign heading_font = settings.heading-font %}
+{% assign body_font = settings.body-font %}
+{% assign font_size = settings.font-size %}
+
+
+{{ heading_font |  font_face }}
+{{ body_font |  font_face }}
+
+body {
+    font-family: {{ body_font.family }},{{ body_font.fallback_families }};
+    font-size: {{ font_size }}px;
+}
+h1, h2, h3, h4, h5, h6, button {
+    font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+}

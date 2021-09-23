@@ -1,0 +1,11 @@
+.hero-section__inner {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+}
+
+.hero-section__bg-image {
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}

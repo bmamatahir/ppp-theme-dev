@@ -1,0 +1,60 @@
+{% for block in section.blocks %}
+    {% assign item = block.settings %}
+    <div class="mb-3">
+        <h2 class="mb-3">{{ item.title }}</h2>
+        {% if block.type == 'image' %}
+            <a href="{{ item.link }}" target="_blank">
+                <img class="img-fluid"  src="{{ item.image | img_url: 'master' }}" alt="{{ item.title }}">
+            </a>
+            {% else %}
+            {{ item.text }}
+        {% endif %}
+    </div>
+{% endfor %}
+{% schema %}
+{
+    "name": "Sidebar",
+    "blocks": [
+        {
+            "name": "Side bar Image",
+            "type": "image",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Image title",
+                    "default": "Image title example"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "External link"
+                }
+            ]
+        },
+        {
+            "name": "Side bar text",
+            "type": "text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Image title",
+                    "default": "Image title example"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text body",
+                    "default": "<p>Write anything to fill this area</p>"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

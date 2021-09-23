@@ -1,0 +1,78 @@
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+    {% assign number_of_comments = article.comments_count %}
+{% endif %}
+
+{% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+{% capture date %}
+    <time
+    datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'abbreviated_date' }}</time>{% endcapture %}
+
+<div class="bg-light py-0 py-md-5 px-3 text-center">
+    <div class="my-5 py-5">
+        <h1 class="h1">{{ article.title }}</h1>
+        <p class="lead">By {{ author }} on {{ date }}</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div>{{ article.content }}</div>
+            {% if blog.comments_enabled? %}
+                <div class="py-3 py-md-4">
+                    <h2 class="mb-4">{{ number_of_comments }} comment{% if number_of_comments > 1 %}s{% endif %}</h2>
+                    {% paginate article.comments by 5 %}
+                        {% for comment in article.comments %}
+                            <div class="card">
+                                <div class="card-header">
+                                    by <b>{{ comment.author }}</b> on {{ comment.created_at | date: format: 'date' }}
+                                </div>
+                                <div class="card-body">
+                                    {{ comment.content }}
+                                </div>
+                            </div>
+                        {% endfor %}
+                        {% render 'pagination', pagnate: paginate %}
+                    {% endpaginate %}
+                </div>
+
+                <div>
+                    {% form 'new_comment', article %}
+                        <div class="bg-light p-3 rounded">
+                            <h3 class="mb-3">Share your thoughts</h3>
+
+                            {% render 'form-error', form: form %}
+
+                            <div class="form-floating  mb-4">
+                                <input class="form-control" type="text" name="comment[author]" id="CommentAuthor"
+                                       placeholder="name"
+                                       value="{{ form.author }}" autocapitalize="words">
+                                <label for="CommentAuthor">name</label>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <input class="form-control" type="email" name="comment[email]" id="CommentEmail"
+                                       placeholder="email" value="{{ form.email }}" autocorrect="off"
+                                       autocapitalize="off">
+                                <label for="CommentEmail">email</label>
+                            </div>
+
+
+                            <div class="form-floating mb-4">
+                            <textarea style="min-height: 120px" class="form-control" name="comment[body]"
+                                      id="CommentBody" placeholder="message">{{ form.body }}</textarea>
+                                <label for="CommentBody">message</label>
+                            </div>
+
+                            <input class="btn btn-primary" type="submit" value="Post">
+                        </div>
+                    {% endform %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            {% section 'sidebar' %}
+        </div>
+    </div>
+</div>

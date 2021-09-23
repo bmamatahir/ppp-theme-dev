@@ -1,0 +1,42 @@
+<div class="container py-5 my-5">
+    <div class="row g-3">
+        <div class="col-md-4 mb-3">
+            <h1>{{ page.title }}</h1>
+            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus deleniti dolorum eaque
+                est ex hic iure laborum numquam obcaecati perferendis, qui reiciendis rem tempore unde!</p>
+        </div>
+        <div class="col-md-6 offset-md-1 offset-xl-2">
+            {% form 'contact' %}
+                {% if form.posted_successfully? %}
+                    <div class="my-3">
+                        <div class="alert alert-success">
+                            Thank you for your contact 😘
+                        </div>
+                    </div>
+                {% endif %}
+                {% render 'form-errors', form: form %}
+                <div class="mb-3 form-floating">
+                    <input class="form-control" type="text" id="ContactFormName" name="contact[name]">
+                    <label class="form-label" for="ContactFormName">name</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input class="form-control" type="email" id="ContactFormEmail" name="contact[email]">
+                    <label class="form-label" for="ContactFormEmail">email</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <input class="form-control" type="tel" id="ContactFormPhone" name="contact[phone]">
+                    <label class="form-label" for="ContactFormPhone">phone</label>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea style="min-height: 120px;" class="form-control" rows="10" id="ContactFormMessage"
+                              name="contact[body]"></textarea>
+                    <label class="form-label" for="ContactFormMessage">message</label>
+                </div>
+                <div>
+                    <input class="btn btn-primary w-100 btn-lg" type="submit" value="Send">
+                </div>
+            {% endform %}
+        </div>
+
+    </div>
+</div>

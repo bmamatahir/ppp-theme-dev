@@ -1,0 +1,27 @@
+<div class="container my-5 py-5">
+    <div class="row row-cols-md-2 justify-content-center">
+        <div class="col">
+            <h2 class="mb-3">Account activation</h2>
+            {% form 'activate_customer_password' %}
+                {% render 'form-errors', form: form %}
+
+                <div class="password mb-3">
+                    <label for="password">Password</label>
+                    <input class="form-control" type="password" name="customer[password]">
+                </div>
+
+                <div class="password_confirm mb-3">
+                    <label for="password_confirmation">Password Confirmation</label>
+                    <input class="form-control" type="password" name="customer[password_confirmation]">
+                </div>
+
+                <div class="submit">
+                    <input class="btn btn-primary" type="submit" value="Activate account">
+                    <span>or</span>
+                    <input class="btn btn-primary" type="submit" name="decline" value="Decline invitation">
+                </div>
+            {% endform %}
+        </div>
+
+    </div>
+</div>

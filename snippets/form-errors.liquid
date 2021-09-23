@@ -1,0 +1,15 @@
+{% if form.errors != blank %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field in form.errors %}
+                <li>
+                    {% if field == 'form' %}
+                        {{ form.errors.messages[field] }}
+                    {% else %}
+                        {{ form.errors.translated_fields[field] }} - {{ form.errors.messages[field] }}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

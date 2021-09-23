@@ -1,0 +1,44 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "PPP theme developement",
+    "theme_version": "2.0.0",
+    "theme_author": "Badr Mamatahir",
+    "theme_documentation_url": "https:\/\/mamatahir.com",
+    "theme_support_url": "https:\/\/mamatahir.com"
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "paragraph",
+        "content": "May sure you website looking good"
+      },
+      {
+        "type": "font_picker",
+        "id": "heading-font",
+        "label": "Heading font",
+        "default": "mono"
+      },
+      {
+        "type": "font_picker",
+        "id": "body-font",
+        "label": "Body font",
+        "default": "mono"
+      },
+      {
+        "type": "range",
+        "id": "font-size",
+        "label": "Body font size",
+        "default": 16,
+        "min": 10,
+        "max": 24,
+        "step": 1
+      }
+    ]
+  }
+]

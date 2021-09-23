@@ -1,0 +1,42 @@
+<div class="{{ section.settings.container }} py-5">
+    <div class="row">
+        <div class="col">
+            <h1>{{ page.title }}</h1>
+            {% if section.settings.show-date %}
+                <span class="small text-muted">{{ page.published_at | date: '%B %d, %Y' }}</span>
+            {% endif %}
+            <div class="mt-4">{{ page.content }}</div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+    "name": "Page template",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "show-date",
+            "label": "Display publish date",
+            "default": false
+        },
+        {
+            "type": "select",
+            "id": "container",
+            "label": "Container style",
+            "options": [
+                    {
+                        "value": "container",
+                        "label": "Container"
+                    },
+                    {
+                        "value": "container-fluid",
+                        "label": "Container Fluid"
+                    }
+            ],
+            "default": "container"
+        }
+    ]
+}
+{% endschema %}

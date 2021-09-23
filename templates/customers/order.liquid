@@ -1,0 +1,43 @@
+<div class="container my-5 py-5">
+    <p class="lead">Order #{{ order.order_number }}</p>
+    <div class="row my-4">
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header">Billing information <div class="badge bg-success">{{ order.financial_status_label }}</div></div>
+                <div class="card-body">
+                    {{ order.billing_address | format_address }}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">Shipping information <div class="badge bg-success">{{ order.fulfillment_status_label }}</div></div>
+                <div class="card-body">
+                    {{ order.shipping_address | format_address }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table table-bordered">
+                <tr>
+                   <th>Product</th>
+                   <th>SKU</th>
+                   <th>Price</th>
+                   <th>Qty</th>
+                   <th>Final price</th>
+                </tr>
+                {% for item in order.line_items %}
+                    <tr>
+                        <td>{{ item.product.title |  link_to: item.product.url }}</td>
+                        <td>{{ item.sku }}</td>
+                        <td>{{ item.final_price |  money }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.final_line_price |  money }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4"><b>SubTotal Price</b></td>
+                    <td class="text-success fw-bold">{{ order.subtotal_price | money }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

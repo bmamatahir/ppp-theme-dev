@@ -1,0 +1,11 @@
+{
+  "general": {
+    "404": {
+      "title": "Pas trouvé",
+      "subtext_html": "La page que vous cherchiez n'existe pas"
+    },
+    "cart": {
+      "title": "Carte de shopping"
+    }
+  }
+}

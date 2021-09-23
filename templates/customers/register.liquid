@@ -1,0 +1,29 @@
+<div class="container py-5 my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-4 col-lg-4">
+            <h2>Create an account</h2>
+            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, numquam obcaecati.</p>
+
+            {% form 'create_customer' %}
+                {% render 'form-errors', form: form %}
+                <div class="mb-3">
+                    <label for="first_name-input" class="form-label">First name</label>
+                    <input type="text" class="form-control  rounded-0" id="first_name-input" name="customer[first_name]">
+                </div>
+                <div class="mb-3">
+                    <label for="last_name-input" class="form-label">Last name</label>
+                    <input type="text" class="form-control  rounded-0" id="last_name-input" name="customer[last_name]">
+                </div>
+                <div class="mb-3">
+                    <label for="email-input" class="form-label">Email address</label>
+                    <input type="email" class="form-control  rounded-0" id="email-input" aria-describedby="emailHelp" name="customer[email]">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password-input" class="form-label">Password</label>
+                    <input type="password" class="form-control  rounded-0" id="password-input" name="customer[password]">
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg rounded-0 w-100" value="Register"/>
+            {% endform %}        </div>
+    </div>
+</div>

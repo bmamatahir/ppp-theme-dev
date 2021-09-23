@@ -1,0 +1,24 @@
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+        }
+      },
+      "163215233926dd3a70": {
+        "type": "hero",
+        "settings": {
+          "primary-heading": "Reach the moon with LOVE 😘"
+        }
+      }
+    },
+    "content_for_index": [
+      "163215233926dd3a70"
+    ]
+  },
+  "presets": {
+    "Default": {
+    }
+  }
+}

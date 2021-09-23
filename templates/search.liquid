@@ -1,0 +1,76 @@
+{% paginate search.results by 10 %}
+    <div class="container py-5">
+        <form action="/search" method="get" role="search" class="row mb-3">
+            <div class="col">
+                <div class="mb-3 d-flex gap-3">
+                    <input class="form-control form-control-lg" type="search" name="q"
+                           value="{{ search.terms | escape }}">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+
+                <div class="d-flex gap-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="product_type"
+                               value="product" name="type">
+                        <label class="form-check-label" for="product_type">Products</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="article_type"
+                               value="article" name="type">
+                        <label class="form-check-label" for="article_type">Articles</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="page_type"
+                               value="page" name="type">
+                        <label class="form-check-label" for="page_type">Pages</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="row mb-4 text-center">
+            <div class="col">
+                <h2>{{ search.results_count }} item{% if search.results_count > 1 %}s{% endif %} found</h2>
+            </div>
+        </div>
+
+        {% if search.performed %}
+            <div class="row row-cols-4">
+                {% for item in search.results %}
+                    <div class="col">
+                        {% if search.types[0] == 'product' %}
+                            {% render 'product-card', product: item %}
+                        {% else %}
+                            <div class="card">
+                                {% if item.image %}
+                                    <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                                        {{ item | img_url: 'medium' | img_tag: item.title, 'card-img-top' }}
+                                    </a>
+                                {% endif %}
+
+                                {% if item.featured_image %}
+                                    <a href="{{ item.url }}" title="{{ item.title | escape }}">
+                                        {{ item.featured_image | img_url: 'medium' | img_tag: item.featured_image.alt, 'card-img-top' }}
+                                    </a>
+                                {% endif %}
+
+                                <div class="card-body">
+                                    <h5>{{ item.title | link_to: item.url }}</h5>
+                                    <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                                </div>
+
+                            </div>
+                        {% endif %}
+
+                    </div>
+                {% else %}
+                    no results
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% render 'pagination', paginate: paginate %}
+    </div>
+{% endpaginate %}

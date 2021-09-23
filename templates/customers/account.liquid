@@ -1,0 +1,63 @@
+<div class="container py-5 my-5">
+    <div class="row">
+        <div class="col-md-4">
+            <h1>Account</h1>
+            <p>Account details</p>
+
+            {{ customer.default_address | format_address }}
+
+            <a href="{{ routes.account_addresses_url }}">
+                View addresses ({{ customer.addresses_count }})
+            </a>
+        </div>
+        <div class="col-md-8">
+            {% paginate customer.orders by 10 %}
+                {%- if customer.orders.size > 0 -%}
+                    <table role="table" class="table">
+                        <caption class="visually-hidden">Title</caption>
+                        <thead role="rowgroup">
+                        <tr role="row">
+                            <th id="ColumnOrder" scope="col" role="columnheader">Order number</th>
+                            <th id="ColumnDate" scope="col" role="columnheader">Date</th>
+                            <th id="ColumnPayment" scope="col" role="columnheader">Payment status</th>
+                            <th id="ColumnFulfillment" scope="col" role="columnheader">Fulfillment status</th>
+                            <th id="ColumnTotal" scope="col" role="columnheader">Total</th>
+                        </tr>
+                        </thead>
+                        <tbody role="rowgroup">
+                        {%- for order in customer.orders -%}
+                            <tr role="row">
+                                <td
+                                        id="RowOrder"
+                                        role="cell"
+                                        headers="ColumnOrder"
+                                        data-label="Order number"
+                                >
+                                    <a href="{{ order.customer_url  }}" aria-label="{{ order.name }}">
+                                        {{ order.name }}
+                                    </a>
+                                </td>
+                                <td headers="RowOrder ColumnDate" role="cell" data-label="Date">
+                                    {{ order.created_at | time_tag: format: 'date' }}
+                                </td>
+                                <td headers="RowOrder ColumnPayment" role="cell" data-label="Payment_status">
+                                    {{ order.financial_status_label }}
+                                </td>
+                                <td headers="RowOrder ColumnFulfillment" role="cell" data-label="Fulfillment_status">
+                                    {{ order.fulfillment_status_label }}
+                                </td>
+                                <td headers="RowOrder ColumnTotal" role="cell" data-label="Total">
+                                    {{ order.total_price | money }}</td>
+                            </tr>
+                        {%- endfor -%}
+                        </tbody>
+                    </table>
+                {%- else -%}
+                    <p>'No order yet'</p>
+                {%- endif -%}
+
+                {% render 'pagination', paginate: paginate %}
+            {% endpaginate %}
+        </div>
+    </div>
+</div>

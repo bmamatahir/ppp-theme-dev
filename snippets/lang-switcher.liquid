@@ -1,0 +1,18 @@
+{% form 'localization', id: 'changeLanguage' %}
+    <input type="hidden" name="language_code" value="localization.language">
+    <div class="btn-group ">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            {{ localization.language.iso_code |  upcase }}
+        </button>
+        <ul class="dropdown-menu">
+            {% for language in localization.available_languages %}
+                {% if language.iso_code != localization.language.iso_code %}
+                    <li class="dropdown-item lang-opt"
+                        data-lang="{{ language.iso_code }}">{{ language.endonym_name }}</li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+    </div>
+{% endform %}

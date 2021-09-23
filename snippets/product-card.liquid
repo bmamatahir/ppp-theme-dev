@@ -1,0 +1,18 @@
+<div class="card" style="min-width: 18rem; max-width: 22rem">
+    {% assign featured_image = product.featured_image %}
+    {% if featured_image != blank %}
+        <img src="{{ featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+    {% else %}
+        {{ 'product-1' | placeholder_svg_tag }}
+    {% endif %}
+
+    <div class="card-body position-relative">
+
+        <h4><a href="{{ product.url }}">{{ product.title }}</a></h4>
+        <div class="fw-bold text-uppercase position-absolute bg-white p-2 rounded-pill border shadow-sm" style="top: -50px; right: 10px">{{ product.price | money }}</div>
+
+        {% if product.description %}
+            <p>{{ product.description | strip_html | truncatewords: 25 }}</p>
+        {% endif %}
+    </div>
+</div>
