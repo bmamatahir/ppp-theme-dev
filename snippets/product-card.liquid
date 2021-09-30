@@ -1,7 +1,9 @@
 <div class="card" style="min-width: 18rem; max-width: 22rem">
     {% assign featured_image = product.featured_image %}
     {% if featured_image != blank %}
-        <img src="{{ featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+        <a href="#" class="showProductModal" product-handle="{{  product.handle }}" product-price="{{ product.price | money_with_currency }}">
+            <img src="{{ featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+        </a>
     {% else %}
         {{ 'product-1' | placeholder_svg_tag }}
     {% endif %}

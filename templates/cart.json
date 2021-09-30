@@ -1,0 +1,22 @@
+{
+    "sections": {
+        "template": {
+            "type": "template-cart",
+            "blocks": {
+                "buttons": {
+                    "type": "buttons"
+                },
+                "price": {
+                    "type": "price"
+                }
+            },
+            "blocks_order": [
+                "price",
+                "buttons"
+            ]
+        }
+    },
+    "order": [
+        "template"
+    ]
+}

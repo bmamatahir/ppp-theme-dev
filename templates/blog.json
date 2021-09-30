@@ -1,0 +1,29 @@
+{
+    "sections": {
+        "template": {
+            "type": "template-blog",
+            "blocks": {
+                "heading": {
+                    "type": "heading"
+                },
+                "grid": {
+                    "type":  "grid"
+                },
+                "pagination":  {
+                    "type":  "pagination"
+                }
+            },
+            "blocks_order": [
+                "heading",
+                "grid",
+                "pagination"
+            ],
+            "settings": {
+
+            }
+        }
+    },
+    "order": [
+        "template"
+    ]
+}

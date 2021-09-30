@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "faq": {
+      "type": "page-faq-template",
+      "blocks": {
+        "faq": {
+          "type": "faq",
+          "settings": {
+            "question":  "Feel free to ask question?",
+            "answer": "<p>Nobody will answer you hhh</p>"
+          }
+        }
+      },
+      "blocks_order": [
+        "faq"
+      ]
+    }
+  },
+  "order": [
+    "faq"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+    "sections": {
+        "template": {
+            "type": "template-collection",
+            "blocks": {
+                "title":  {
+                    "type": "title"
+                },
+                "articles": {
+                    "type":  "articles"
+                },
+                "pagination":  {
+                    "type":  "pagination"
+                },
+                "sort_by": {
+                    "type":  "sort_by"
+                }
+            },
+            "blocks_order": [
+                "title",
+                "articles",
+                "pagination",
+                "sort_by"
+            ]
+        }
+    },
+    "order": [
+        "template"
+    ]
+}

@@ -1,0 +1,84 @@
+<div class="d-flex flex-column gap-3 mb-5">
+    {% paginate blog.articles by 4 %}
+
+        {% for block in section.blocks %}
+
+            {% case block.type %}
+                {% when 'heading' %}
+                    {% comment %}
+                        Heading
+                    {% endcomment %}
+                    <div class="bg-light text-center py-5">
+                        <div class="my-5">
+                            <h1 class="h1">{{ blog.title }}</h1>
+                            <p class="lead">We are everywhere, Keep your eyes on us</p>
+                        </div>
+                    </div>
+                {% when 'grid' %}
+                    {% comment %}
+                       Grid
+                   {% endcomment %}
+                    <div class="container">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                            {% for article in blog.articles %}
+                                <div class="col">
+                                    <div class="card shadow-sm">
+                                        {% if article.image != blank %}
+                                            <img class="card-img-top" src="{{ article.image | img_url: '320x260' }}"
+                                                 alt="{{ article.image.alt | escape }}">
+                                        {% else %}
+                                            {{ 'image' | placeholder_svg_tag: 'card-img-top' }}
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+                                            {{ article.author }} @ {{ article.created_at | date: '%B %d, %Y' }}
+                                            <div>
+                                                {% if article.excerpt.size > 0 %}
+                                                    {{ article.excerpt }}
+                                                {% else %}
+                                                    <p>{{ article.content | strip_html | truncatewords: 30 }}</p>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% when 'pagination' %}
+                    {% comment %}
+                        Pagination
+                    {% endcomment %}
+                    <div class="container">
+                        {% render 'pagination', paginate: paginate %}
+                    </div>
+                {% else %}
+                    <p>Open the customizer and put some content here</p>
+            {% endcase %}
+        {% endfor %}
+    {% endpaginate %}
+</div>
+
+{% schema %}
+{
+"name": "Blog page",
+"blocks": [
+{
+"type": "heading",
+"name": "Blog Heading",
+"limit": 1
+},
+{
+"type": "grid",
+"name": "Blog articles grid",
+"limit": 1
+},
+{
+"type": "pagination",
+"name": "Blog pagination",
+"limit": 1
+}
+]
+}
+{% endschema %}

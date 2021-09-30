@@ -9,3 +9,51 @@
   width: 100%;
   z-index: -1;
 }
+
+
+.search__wrapper {
+  position: relative;
+}
+
+.search__input {
+
+}
+
+.search__suggestions {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+
+  background: white;
+  list-style: none;
+  padding: 5px 0;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  margin-top: .5rem;
+}
+
+.search__suggestions li:not(:last-child) {
+  border-bottom: 1px solid darkgrey;
+}
+
+
+.search__suggestions li a {
+  text-decoration: none;
+  padding: .5rem 1rem;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.search__suggestions li a:hover {
+  background: #f6f6f6;
+}
+
+
+.search__suggestions-price {
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: none;
+}

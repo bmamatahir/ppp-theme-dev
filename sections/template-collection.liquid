@@ -1,0 +1,110 @@
+<div class="container py-5 d-flex flex-column gap-5">
+    {% paginate collection.products by 4 %}
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'title' %}
+                    <div class="row">
+                        <h1 class="h1 text-center">{{ collection.title }}</h1>
+                    </div>
+                {% when 'articles' %}
+                    <div class="row justify-content-center gap-3">
+                        {% for product in collection.products %}
+                            <div class="col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+                                {% render 'product-card', product: product %}
+                            </div>
+                        {% else %}
+                            <p>no matches</p>
+                        {% endfor %}
+                    </div>
+
+                {% when 'pagination' %}
+                    <div class="row justify-content-end">
+                        <div class="w-25">
+                            {% render 'pagination', paginate: paginate %}
+                        </div>
+                    </div>
+                {% when 'sort_by' %}
+                    <div class="row justify-content-center">
+                        <select name="sorting" id="sort_by" class="form-select form-select-sm w-25">
+                            {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+
+                            {% for option in collection.sort_options %}
+                                <option value="{{ option.value }}"
+                                        {% if option.value == sort_by %}selected="selected"{% endif %}>
+                                    {{ option.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+            {% endcase %}
+
+        {% endfor %}
+
+    {% endpaginate %}
+
+</div>
+
+
+<div class="modal fade" id="productDetailsModal" tabindex="-1" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="productDetailsModalLabel">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row row-cols-1 row-cols-md-2">
+                    <div class="col">
+                        <img src="" alt="" id="featured-image" class="img-fluid">
+                    </div>
+                    <div class="col">
+                        <h2 id="product-name"></h2>
+                        <p class="lead fw-bold" id="product-price"></p>
+                        <p id="product-description"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="d-flex gap-3">
+                    <input type="number" name="quantity" id="quantity" min="1" value="1" class="form-control" placeholder="Quantity">
+                    <select name="id" id="variant" class="form-select">
+                    </select>
+                    <input type="button" class="btn btn-primary text-nowrap" id="addToCard" value="Add to cart"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "All products",
+"blocks": [
+{
+"type": "title",
+"name": "title",
+"limit": 1
+},
+{
+"type": "articles",
+"name": "Product list",
+"limit": 1
+},
+{
+"type": "pagination",
+"name": "Product pagination",
+"limit": 1
+},
+{
+"type": "sort_by",
+"name": "Sorting input",
+"limit": 1
+}
+]
+}
+{% endschema %}
+
+

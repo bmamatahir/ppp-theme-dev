@@ -45,13 +45,23 @@
             </div>
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-body">
-                        <h3>The total amount</h3>
-                        <p>{{ cart.total_price | money }}</p>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-primary w-100" type="submit" name="update">Update</button>
-                            <button class="btn btn-primary w-100" type="submit" name="checkout">Checkout</button>
-                        </div>
+                    <div class="card-body d-flex flex-column gap-3">
+                        {% for block in section.blocks %}
+                            {% case block.type %}
+                                {% when 'price' %}
+                                    <div>
+                                        <h3>The total amount</h3>
+                                        <p>{{ cart.total_price | money }}</p>
+                                    </div>
+                                {% when 'buttons' %}
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-primary w-100" type="submit" name="update">Update
+                                        </button>
+                                        <button class="btn btn-primary w-100" type="submit" name="checkout">Checkout
+                                        </button>
+                                    </div>
+                            {% endcase %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -64,3 +74,20 @@
         </div>
     </div>
 {% endif %}
+{% schema %}
+{
+"name": "Shopping cart",
+"blocks": [
+{
+"name": "Price",
+"type": "price",
+"limit": 1
+},
+{
+"name": "Action buttons",
+"type": "buttons",
+"limit": 1
+}
+]
+}
+{% endschema %}

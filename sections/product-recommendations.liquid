@@ -1,0 +1,16 @@
+{%- if recommendations.performed -%}
+    <div id="product-recommendations">
+        {%- if recommendations.products_count > 0 -%}
+            <h2 class="mb-4 text-center">You may also like</h2>
+            <div class="row justify-content-center gap-3">
+                {%- for product in recommendations.products -%}
+                    <div class="col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center">
+                        {% render 'product-card', product: product %}
+                    </div>
+                {% else %}
+                    <p>No recommendation</p>
+                {%- endfor -%}
+            </div>
+        {%- endif -%}
+    </div>
+{%- endif -%}
